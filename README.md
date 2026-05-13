@@ -2,6 +2,8 @@
 
 Projeto de exemplo que consome a API do The Movie Database (TMDB), criado durante um workshop de React promovido pela WebTech Network para o evento de 10 anos de Engenharia de Software na PUC Minas Lourdes.
 
+![foto do projeto](./public/wireframe.png)
+
 **Resumo:**
 - **Objetivo:** Mostrar uma integração simples e prática com a API do TMDB para pesquisar filmes, séries e exibir detalhes (incluindo elenco e trailer).
 - **Contexto:** Desenvolvido como parte de um workshop de React (WebTech Network) para a celebração dos 10 anos do curso de Engenharia de Software na PUC Minas Lourdes.
