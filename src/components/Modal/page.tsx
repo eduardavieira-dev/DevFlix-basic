@@ -1,6 +1,6 @@
 import { PlayIcon, StarIcon, XIcon } from '@phosphor-icons/react'
 import type { Filme } from '../../types/filme'
-import { Carousel } from './_components/carousel/page'
+import { Carousel } from './_components/Carousel/page'
 
 export type CastMember = {
   name: string
@@ -14,7 +14,6 @@ type ModalProps = {
 }
 
 export function Modal({ filme, fecharModal }: ModalProps) {
-
   return (
     <div
       onClick={fecharModal}
@@ -41,8 +40,8 @@ export function Modal({ filme, fecharModal }: ModalProps) {
           w-full
           max-w-5xl
 
-          max-h-[100vh]
-          overflow-hidden
+          max-h-[95vh]
+          overflow-y-auto
           rounded-3xl
           border
           border-white/10
@@ -86,13 +85,17 @@ export function Modal({ filme, fecharModal }: ModalProps) {
             onClick={fecharModal}
             className="
               absolute
-              right-3
-              top-3
+              right-4
+              top-4
+              sm:right-3
+              sm:top-3
               z-50
 
               flex
-              h-10
-              w-10
+              h-12
+              w-12
+              sm:h-10
+              sm:w-10
               items-center
               justify-center
 
@@ -104,7 +107,7 @@ export function Modal({ filme, fecharModal }: ModalProps) {
               hover:bg-black
             "
           >
-            <XIcon size={20} />
+            <XIcon size={22} weight="bold" />
           </button>
 
           {/* conteúdo */}

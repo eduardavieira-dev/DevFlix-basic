@@ -49,7 +49,7 @@ export function Carousel({ filme }: { filme: Filme }) {
           >
             {filme.cast.map((actor) => (
               <div key={actor.name} className="w-30 shrink-0">
-                <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg transition-transform duration-200 hover:-translate-y-1">
+                <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg transition-transform duration-200">
                   <img
                     src={actor.image}
                     alt={actor.name}

@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* Remove a barra de rolagem do carousel */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
