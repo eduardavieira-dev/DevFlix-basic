@@ -24,8 +24,8 @@ function App() {
   async function loadPopularFilmes() {
     setLoading(true)
     const results = await getPopular()
-    // Pega apenas os primeiros 12 resultados
-    const filmesFomatados = results.slice(0, 12).map(formatResultToFilme)
+    // Pega apenas os primeiros 16 resultados
+    const filmesFomatados = results.slice(0, 16).map(formatResultToFilme)
     setFilmes(filmesFomatados)
     setLoading(false)
   }
@@ -41,8 +41,8 @@ function App() {
     } else {
       // Busca por termo
       const results = await searchMulti(term)
-      // Pega apenas os primeiros 12 resultados
-      const filmesFomatados = results.slice(0, 12).map(formatResultToFilme)
+      // Pega apenas os primeiros 16 resultados
+      const filmesFomatados = results.slice(0, 16).map(formatResultToFilme)
       setFilmes(filmesFomatados)
     }
 
