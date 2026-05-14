@@ -12,70 +12,111 @@ import { Footer } from './components/Footer/pages'
 function App() {
   const [selectedFilme, setSelectedFilme] = useState<Filme | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [filmes, setFilmes] = useState<Filme[]>([])
   const [loading, setLoading] = useState(false)
 
-  // Carrega filmes populares quando a página abre
   useEffect(() => {
     loadPopularFilmes()
   }, [])
 
-  // Busca filmes populares ao iniciar
-  async function loadPopularFilmes() {
-    setLoading(true)
-    const results = await getPopular()
-    // Pega apenas os primeiros 16 resultados
-    const filmesFomatados = results.slice(0, 16).map(formatResultToFilme)
-    setFilmes(filmesFomatados)
-    setLoading(false)
-  }
+  async function loadPopularFilmes() {}
 
-  // Busca filmes conforme o usuário digita
   async function handleSearch(term: string) {
     setSearchTerm(term)
-    setLoading(true)
-
-    if (term.trim().length === 0) {
-      // Se limpou o campo, mostra populares de novo
-      await loadPopularFilmes()
-    } else {
-      // Busca por termo
-      const results = await searchMulti(term)
-      // Pega apenas os primeiros 16 resultados
-      const filmesFomatados = results.slice(0, 16).map(formatResultToFilme)
-      setFilmes(filmesFomatados)
-    }
-
-    setLoading(false)
   }
 
-  const semResultados = searchTerm.trim().length > 0 && filmes.length === 0
-
-  // Função para carregar detalhes completos do filme (com elenco)
   async function handleFilmeClick(filme: Filme) {
-    const detalhes = await getFilmeDetails(filme.id, filme.mediaType)
-    // Atualiza o filme com elenco, gêneros, duração e URL do trailer completos
-    const filmeComDetalhes: Filme = {
-      ...filme,
-      cast: detalhes.cast,
-      genres: detalhes.genres,
-      duration: detalhes.duration,
-      watchUrl: detalhes.trailerUrl,
-    }
-    setSelectedFilme(filmeComDetalhes)
+    // Abre o modal com os detalhes do filme selecionado
+    setSelectedFilme(filme)
   }
+
+  const filmes: Filme[] = [
+    {
+      id: 1,
+      title: 'O drama',
+      year: 2026,
+      rating: 7.0,
+      imageUrl: './banner.png',
+      bannerUrl: './background.png',
+      duration: '2h 15m',
+      genres: 'Drama, Ficção Científica',
+      description:
+        'Uma história épica de drama e ficção científica que vai te deixar preso na tela.',
+      watchUrl: '#',
+      cast: [
+        { name: 'Ator 1', image: './banner.png', character: 'Personagem Principal' },
+        { name: 'Ator 2', image: './banner.png', character: 'Coadjuvante' },
+      ],
+      mediaType: 'movie',
+    },
+    {
+      id: 2,
+      title: 'Gente Grande',
+      year: 2026,
+      rating: 7.0,
+      imageUrl: './banner.png',
+      bannerUrl: './background.png',
+      duration: '2h 15m',
+      genres: 'Drama, Ficção Científica',
+      description:
+        'Uma história épica de drama e ficção científica que vai te deixar preso na tela.',
+      watchUrl: '#',
+      cast: [
+        { name: 'Ator 1', image: './banner.png', character: 'Personagem Principal' },
+        { name: 'Ator 2', image: './banner.png', character: 'Coadjuvante' },
+      ],
+      mediaType: 'movie',
+    },
+    {
+      id: 3,
+      title: 'Stranger Things',
+      year: 2026,
+      rating: 7.0,
+      imageUrl: './banner.png',
+      bannerUrl: './background.png',
+      duration: '2h 15m',
+      genres: 'Drama, Ficção Científica',
+      description:
+        'Uma história épica de drama e ficção científica que vai te deixar preso na tela.',
+      watchUrl: '#',
+      cast: [
+        { name: 'Ator 1', image: './banner.png', character: 'Personagem Principal' },
+        { name: 'Ator 2', image: './banner.png', character: 'Coadjuvante' },
+      ],
+      mediaType: 'movie',
+    },
+    {
+      id: 4,
+      title: 'Sabrina',
+      year: 2026,
+      rating: 7.0,
+      imageUrl: './banner.png',
+      bannerUrl: './background.png',
+      duration: '2h 15m',
+      genres: 'Drama, Ficção Científica',
+      description:
+        'Uma história épica de drama e ficção científica que vai te deixar preso na tela.',
+      watchUrl: '#',
+      cast: [
+        { name: 'Ator 1', image: './banner.png', character: 'Personagem Principal' },
+        { name: 'Ator 2', image: './banner.png', character: 'Coadjuvante' },
+      ],
+      mediaType: 'movie',
+    },
+  ]
 
   return (
-    <div className="bg-black min-h-screen text-white">
-      <main className="max-w-7xl flex flex-col mx-auto p-4">
-        <h1 className="text-2xl font-bold flex gap-1 items-center mt-3 text-center justify-center">
-          <FilmSlateIcon className="text-cyan-400" />
-          Dev<span className="text-cyan-400">Flix</span>
+    <div>
+      <main>
+        <h1>
+          <FilmSlateIcon/>
+          Dev<span>Flix</span>
         </h1>
-        <p className='text-neutral-400 text-sm text-center justify-center mb-5 md:mb-8'>Consumindo a API do The Movie Database (TMDB) com React e TypeScript</p>
+        <p>
+          Consumindo a API do The Movie Database (TMDB) com React e TypeScript
+        </p>
         <section>
           <SearchInput value={searchTerm} onChange={handleSearch} />
-          <div className="max-w-5xl grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 sm:gap-4 mx-auto p-3 sm:p-5">
+          <div>
             {loading && (
               <span className="col-span-full text-center text-sm text-neutral-400">
                 Carregando...
@@ -84,25 +125,14 @@ function App() {
             {!loading &&
               filmes.map((filme) => (
                 <div key={filme.id} onClick={() => handleFilmeClick(filme)}>
-                  <Banner
-                    imageUrl={filme.imageUrl}
-                    title={filme.title}
-                    year={filme.year}
-                    rating={filme.rating}
-                  />
+                  //adciocionar o componente Banner do filme
                 </div>
               ))}
-            {!loading && semResultados && (
-              <span className="col-span-full text-center text-md text-neutral-400">
-                Filme não encontrado
-              </span>
-            )}
           </div>
         </section>
       </main>
 
-      {selectedFilme && <Modal filme={selectedFilme} fecharModal={() => setSelectedFilme(null)} />}
-        <Footer/>
+      {/*{selectedFilme && <Modal filme={selectedFilme} fecharModal={() => setSelectedFilme(null)} />}*/}
     </div>
   )
 }
